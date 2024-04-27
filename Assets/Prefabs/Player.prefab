@@ -26,7 +26,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.94, z: -1.97}
+  m_LocalPosition: {x: 0, y: 0.79, z: -1.14}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -178,6 +178,7 @@ GameObject:
   - component: {fileID: 8001475110465974732}
   - component: {fileID: 2545671238530007404}
   - component: {fileID: 8839651537331938504}
+  - component: {fileID: 4232112694530264386}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -233,6 +234,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rotateSensitive: 2
   forwardSpeed: 5
+--- !u!114 &4232112694530264386
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3886499334353103709}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5bc4eefbdf353e94882585f9b764b525, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 20
+  ammoMax: 20
+  ammoText: {fileID: 0}
 --- !u!1 &8045355799515640979
 GameObject:
   m_ObjectHideFlags: 0

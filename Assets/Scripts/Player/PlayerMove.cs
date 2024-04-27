@@ -1,12 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerMove : MonoBehaviour
 {
     Rigidbody rb;
+    float fuel = 100;
+    float fuelDecreaseRate = 0.1f;
+    float howLongWaitOfFuelDecrease = 1;
     public float rotateSensitive = 10;
     public float forwardSpeed;
+    public bool isInvertedPitch = true;
+    [SerializeField] Slider fuelbar;
     // Start is called before the first frame update
     void Start()
     {
@@ -16,6 +22,7 @@ public class PlayerMove : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        fuelbar.value = fuel / 100;
         Forward();
         Pitch();
         Yaw();
@@ -23,9 +30,9 @@ public class PlayerMove : MonoBehaviour
     }
     void Forward()
     {
-        // KeyMove(KeyCode.Space, 2, false);
         if (Input.GetKey(KeyCode.Space))
         {
+            StartCoroutine(DepleteFuel());
             Vector3 forwardVector = new Vector3(0, 0, forwardSpeed);
             rb.AddRelativeForce(forwardVector);
             print(forwardVector.z);
@@ -33,8 +40,16 @@ public class PlayerMove : MonoBehaviour
     }
     void Pitch()
     {
-        KeyRotate(KeyCode.UpArrow, 0, true);
-        KeyRotate(KeyCode.DownArrow, 0, false);
+        if(isInvertedPitch == false)
+        {
+            KeyRotate(KeyCode.UpArrow, 0, true);
+            KeyRotate(KeyCode.DownArrow, 0, false);
+        }
+        else
+        {
+            KeyRotate(KeyCode.UpArrow, 0, false);
+            KeyRotate(KeyCode.DownArrow, 0, true);
+        }
     }
     void Roll()
     {
@@ -45,29 +60,6 @@ public class PlayerMove : MonoBehaviour
     {
         KeyRotate(KeyCode.LeftArrow, 1, true);
         KeyRotate(KeyCode.RightArrow, 1, false);
-    }
-    void KeyMove(KeyCode key, short whichAxis, bool isNegative)
-    {
-        float moveAmount = forwardSpeed;
-        if (isNegative == true) moveAmount = -moveAmount;
-        Vector3 move = Vector3.zero;
-        if (whichAxis == 0)
-        {
-            move = new Vector3(moveAmount, 0, 0);
-        }
-        else if(whichAxis == 1)
-        {
-            move = new Vector3(0, moveAmount, 0);
-        }
-        else if(whichAxis == 1)
-        {
-            move = new Vector3(0, 0, moveAmount);
-        }
-        print(move);
-        if (Input.GetKey(key))
-        {
-            rb.AddRelativeForce(move);
-        }
     }
     void KeyRotate(KeyCode key, short whichAxis,bool isNegative)
     {
@@ -90,6 +82,29 @@ public class PlayerMove : MonoBehaviour
         if (Input.GetKey(key))
         {
             transform.Rotate(rotateFinal, Space.Self);
+        }
+    }
+    IEnumerator DepleteFuel()
+    {
+        yield return new WaitForSeconds(howLongWaitOfFuelDecrease);
+        fuel -= fuelDecreaseRate;
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+        CheckTagForCollider(other);
+        
+    }
+    void CheckTagForCollider(Collider whatCollider)
+    {
+        if(whatCollider.CompareTag("Refuel Here"))
+        {
+            fuel = 100;
+            fuelbar.value = 1;
+        }
+        else if(whatCollider.gameObject.CompareTag("Reload Here"))
+        {
+            PlayerAttack myAttack = GetComponent<PlayerAttack>();
+            myAttack.ammo = myAttack.ammoMax;
         }
     }
 }
