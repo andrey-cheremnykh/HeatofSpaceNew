@@ -8,23 +8,42 @@ public class EnemyHealth : MonoBehaviour
 {
     public int health = 100;
     public int defense = 0;
-    [SerializeField] Slider healthBar;
+    public int income = 10;
+    [SerializeField] int minDefense, maxDefense;
+    /*[SerializeField]*/public Slider healthBar;
+    MoneyManager moneyManager;
     // Start is called before the first frame update
     void Start()
     {
-        defense = Random.Range(1, 10);
+        defense = Random.Range(minDefense, maxDefense);
         healthBar.value = 0;
+        moneyManager = FindObjectOfType<MoneyManager>();
     }
 
     // Update is called once per frame
     void Update()
     {
         DisplayHealth();
-        if (health <= 0) Destroy(gameObject);
+        if (health <= 0) 
+        {
+            moneyManager.AddMoney(income);
+            Destroy(gameObject);
+        } 
+
+            
     }
-    void DisplayHealth()
+    public void DisplayHealth()
     {
-        healthBar.value = health / 100;
+        healthBar.value = (float)health / 100;
+
+    }
+    public void GetDamage()
+    {
+        PlayerAttack player = FindObjectOfType<PlayerAttack>();
+        var initialDamage = player.damage;
+        var finalDamage = initialDamage - defense;
+        health -= finalDamage;
+        print(healthBar.value);
 
     }
 

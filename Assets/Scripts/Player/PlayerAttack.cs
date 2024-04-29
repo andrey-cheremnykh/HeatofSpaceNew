@@ -10,6 +10,7 @@ public class PlayerAttack : MonoBehaviour
     public int ammoMax = 20;
     public int ammo = 0;
     [SerializeField] TMP_Text ammoText;
+    [SerializeField] int layerMask = 6;
     // Start is called before the first frame update
     void Start()
     {
@@ -20,16 +21,30 @@ public class PlayerAttack : MonoBehaviour
     void Update()
     {
         DisplayAmmo();
-        if (Input.GetKeyDown(KeyCode.S))
-        {
-            if (ammo <= 0) return;
-            ammo--;
-            //send raycast from camera
-        }
-        //check if raycast hit enemy
+        Fire();
     }
     void DisplayAmmo()
     {
         ammoText.text = ammo + "/" + ammoMax;
+    }
+    void Fire()
+    {
+        if (Input.GetKeyDown(KeyCode.S))
+        {
+            if (ammo <= 0) return;
+            ammo--;
+            Vector3 origin = Camera.main.transform.position;
+            Vector3 dir = Camera.main.transform.forward; 
+            RaycastHit hitInfo;
+            Physics.Raycast(origin, dir, out hitInfo, Mathf.Infinity);
+            if (hitInfo.transform)
+            {
+                EnemyHealth en = hitInfo.transform.gameObject.GetComponent<EnemyHealth>();
+                if (en == null) print("no hit but hit something");
+                en.GetDamage();
+            }
+            else print("no hit");    
+        }
+
     }
 }

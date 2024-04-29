@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
 {
-    [SerializeField] GameObject enemyPrefab;
+    [SerializeField] GameObject[] enemyPrefabs;
     [SerializeField] Vector3 minSpawnPos, maxSpawnPos;
     [SerializeField] int desiredEnemyCount = 10;
     EnemyHealth[] enemies;
@@ -29,10 +29,12 @@ public class EnemySpawner : MonoBehaviour
         if (enemyCount >= desiredEnemyCount) isEnemyCountAboveOrHigherThanDesired = true;
         if (isEnemyCountAboveOrHigherThanDesired == true) return;
 
+        int IndexofEnemyPrefabToSpawn = Random.Range(0, enemyPrefabs.Length /*- 1*/);
+        GameObject enemyPrefabToSpawn = enemyPrefabs[IndexofEnemyPrefabToSpawn];
         float SpawnPosX = Random.Range(minSpawnPos.x, maxSpawnPos.x);
         float SpawnPosY = Random.Range(minSpawnPos.y, maxSpawnPos.y);
         float SpawnPosZ = Random.Range(minSpawnPos.z, maxSpawnPos.z);
         Vector3 spawnPos = new Vector3(SpawnPosX, SpawnPosY, SpawnPosZ);
-        Instantiate(enemyPrefab,spawnPos,Quaternion.identity);
+        Instantiate(enemyPrefabToSpawn,spawnPos,Quaternion.identity);
     }
 }

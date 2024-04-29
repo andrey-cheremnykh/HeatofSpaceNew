@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 963194228}
   - component: {fileID: 963194227}
   - component: {fileID: 963194226}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Main Camera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
@@ -95,7 +95,7 @@ GameObject:
   - component: {fileID: 6708783738842254318}
   - component: {fileID: 256044573812076179}
   - component: {fileID: 7075841125123998928}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Nose
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -179,7 +179,7 @@ GameObject:
   - component: {fileID: 2545671238530007404}
   - component: {fileID: 8839651537331938504}
   - component: {fileID: 4232112694530264386}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -234,6 +234,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rotateSensitive: 2
   forwardSpeed: 5
+  isInvertedPitch: 1
+  fuelbar: {fileID: 0}
 --- !u!114 &4232112694530264386
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -248,6 +250,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 20
   ammoMax: 20
+  ammo: 0
   ammoText: {fileID: 0}
 --- !u!1 &8045355799515640979
 GameObject:
@@ -261,7 +264,7 @@ GameObject:
   - component: {fileID: 6856833494562540641}
   - component: {fileID: 4242238835555864269}
   - component: {fileID: 68923190309706941}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Capsule
   m_TagString: Untagged
   m_Icon: {fileID: 0}

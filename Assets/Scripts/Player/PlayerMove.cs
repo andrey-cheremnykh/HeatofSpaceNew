@@ -33,9 +33,9 @@ public class PlayerMove : MonoBehaviour
         if (Input.GetKey(KeyCode.Space))
         {
             StartCoroutine(DepleteFuel());
+            if (fuel <= 0) return;
             Vector3 forwardVector = new Vector3(0, 0, forwardSpeed);
             rb.AddRelativeForce(forwardVector);
-            print(forwardVector.z);
         }
     }
     void Pitch()
