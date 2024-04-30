@@ -36,6 +36,13 @@ public class MoneyManager : MonoBehaviour
             return canPurchase;
         }
     }
+    public void SpendMoney(int spending)
+    {
+        int oldMoney = PlayerPrefs.GetInt("money");
+        int newMoney = oldMoney - spending;
+        money = newMoney;
+        PlayerPrefs.SetInt("money", money);
+    }
     public void AddMoney(int income)
     {
         int moneyOld = PlayerPrefs.GetInt("money");

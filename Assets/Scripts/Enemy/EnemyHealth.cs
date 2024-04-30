@@ -43,7 +43,6 @@ public class EnemyHealth : MonoBehaviour
         var initialDamage = player.damage;
         var finalDamage = initialDamage - defense;
         health -= finalDamage;
-        print(healthBar.value);
 
     }
 

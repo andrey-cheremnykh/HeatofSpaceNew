@@ -30,6 +30,8 @@ public class PlayerMove : MonoBehaviour
     }
     void Forward()
     {
+        bool isAlive = CheckIsAlive();
+        if (!isAlive) return;
         if (Input.GetKey(KeyCode.Space))
         {
             StartCoroutine(DepleteFuel());
@@ -40,7 +42,9 @@ public class PlayerMove : MonoBehaviour
     }
     void Pitch()
     {
-        if(isInvertedPitch == false)
+        bool isAlive = CheckIsAlive();
+        if (!isAlive) return;
+        if (isInvertedPitch == false)
         {
             KeyRotate(KeyCode.UpArrow, 0, true);
             KeyRotate(KeyCode.DownArrow, 0, false);
@@ -53,11 +57,15 @@ public class PlayerMove : MonoBehaviour
     }
     void Roll()
     {
+        bool isAlive = CheckIsAlive();
+        if (!isAlive) return;
         KeyRotate(KeyCode.A, 2, false);
         KeyRotate(KeyCode.D, 2, true);
     }
     void Yaw()
     {
+        bool isAlive = CheckIsAlive();
+        if (!isAlive) return;
         KeyRotate(KeyCode.LeftArrow, 1, true);
         KeyRotate(KeyCode.RightArrow, 1, false);
     }
@@ -106,5 +114,20 @@ public class PlayerMove : MonoBehaviour
             PlayerAttack myAttack = GetComponent<PlayerAttack>();
             myAttack.ammo = myAttack.ammoMax;
         }
+    }
+    bool CheckIsAlive()
+    {
+        PlayerHealth playerHealth = GetComponent<PlayerHealth>();
+        bool isAlive = true;
+        if (playerHealth.hp <= 0)
+        {
+            isAlive = false;
+        }
+        else
+        {
+            isAlive = true;
+        }
+
+        return isAlive;
     }
 }
