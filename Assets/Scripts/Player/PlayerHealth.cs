@@ -13,6 +13,7 @@ public class PlayerHealth : MonoBehaviour
     void Start()
     {
         deathUI.SetActive(false);
+        
     }
 
     // Update is called once per frame
@@ -32,7 +33,7 @@ public class PlayerHealth : MonoBehaviour
     }
     public void DisplayHealth()
     {
-        healthBar.value = hp / 100;
+        healthBar.value = (float)hp / 100;
     }
 
 }

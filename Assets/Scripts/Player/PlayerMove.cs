@@ -7,7 +7,7 @@ public class PlayerMove : MonoBehaviour
 {
     Rigidbody rb;
     float fuel = 100;
-    float fuelDecreaseRate = 0.1f;
+    public float fuelDecreaseRate = 0.1f;
     float howLongWaitOfFuelDecrease = 1;
     public float rotateSensitive = 10;
     public float forwardSpeed;
@@ -35,7 +35,7 @@ public class PlayerMove : MonoBehaviour
         if (Input.GetKey(KeyCode.Space))
         {
             StartCoroutine(DepleteFuel());
-            if (fuel <= 0) return;
+            if (fuel <= 0) GetComponent<PlayerHealth>().hp = 0;
             Vector3 forwardVector = new Vector3(0, 0, forwardSpeed);
             rb.AddRelativeForce(forwardVector);
         }

@@ -30,10 +30,10 @@ public class EnemyAttack : MonoBehaviour
     }
     IEnumerator Fire()
     {
-            Vector3 startPos = transform.position;
-            Vector3 dir = transform.forward;
-            RaycastHit hitInfo;
-            Physics.Raycast(startPos, dir, out hitInfo, Mathf.Infinity);
+        Vector3 startPos = transform.position;
+        Vector3 dir = transform.forward;
+        RaycastHit hitInfo;
+        Physics.Raycast(startPos, dir, out hitInfo, Mathf.Infinity);
         if (hitInfo.transform)
         {
             PlayerHealth player = hitInfo.transform.gameObject.GetComponent<PlayerHealth>();

@@ -7,24 +7,32 @@ using TMPro;
 
 public class UI : MonoBehaviour
 {
-    public GameObject diedPanel;
+    [SerializeField] TMP_Text[] moneyTexts;
     // Start is called before the first frame update
     void Start()
     {
-        diedPanel.SetActive(false);
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        DisplayMoney(); 
     }
     public void PressButtonGoToScene(int sceneIndex)
     {
         SceneManager.LoadScene(sceneIndex);
     }
-    public void PressButtonActivatePanel(GameObject panel, bool isActivate)
+    public void PressButtonSetPanelActive(GameObject panel, bool isActivate)
     {
         panel.SetActive(isActivate);
+    }
+    void DisplayMoney()
+    {
+        if (moneyTexts.Length == 0) return;
+        for (int i = 0; i < moneyTexts.Length; i++)
+        {
+            moneyTexts[i].text = "Money: " + PlayerPrefs.GetInt("money");
+        }
     }
 }

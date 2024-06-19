@@ -6,40 +6,19 @@ using TMPro;
 public class MoneyManager : MonoBehaviour
 {
     public int money = 0;
-    [SerializeField] TMP_Text moneyText;
-    // Start is called before the first frame update
     void Start()
     {
         money = PlayerPrefs.GetInt("money");
     }
-
-    // Update is called once per frame
-    void Update()
+    public bool CheckCanPurchase(int spending)
     {
-        DisplayMoney();
+        if (money >= spending) return true;
+        else return false;
     }
-    public bool CheckCanPurchaseItem(int price)
-    {
-        bool canPurchase = false;
-        int moneyOld = PlayerPrefs.GetInt("money");
-        if (moneyOld >= price)
-        {
-            canPurchase = true;
-            int newMoney = money - price;
-            money = newMoney;
-            PlayerPrefs.SetInt("money", money);
-            return canPurchase;
-        }
-        else
-        {
-            canPurchase = false;
-            return canPurchase;
-        }
-    }
-    public void SpendMoney(int spending)
+    public void SpendMoney(int price)
     {
         int oldMoney = PlayerPrefs.GetInt("money");
-        int newMoney = oldMoney - spending;
+        int newMoney = oldMoney - price;
         money = newMoney;
         PlayerPrefs.SetInt("money", money);
     }
@@ -49,9 +28,5 @@ public class MoneyManager : MonoBehaviour
         int newMoney = moneyOld + income;
         money = newMoney;
         PlayerPrefs.SetInt("money", money);
-    }
-    void DisplayMoney()
-    {
-        moneyText.text = "Money " + PlayerPrefs.GetInt("money");
     }
 }

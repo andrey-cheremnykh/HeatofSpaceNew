@@ -8,10 +8,14 @@ public class EnemyHealth : MonoBehaviour
 {
     public int health = 100;
     public int defense = 0;
+
+    [Space]
+
     public int income = 10;
     [SerializeField] int minDefense, maxDefense;
-    /*[SerializeField]*/public Slider healthBar;
+    public Slider healthBar;
     MoneyManager moneyManager;
+
     // Start is called before the first frame update
     void Start()
     {
