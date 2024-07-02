@@ -2,17 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class PlayerMove : MonoBehaviour
 {
     Rigidbody rb;
     float fuel = 100;
     public float fuelDecreaseRate = 0.1f;
-    float howLongWaitOfFuelDecrease = 1;
+    float howLongWaitOfFuelDecrease = 0.5f;
+
+    [Space]
+
     public float rotateSensitive = 10;
     public float forwardSpeed;
     public bool isInvertedPitch = true;
-    [SerializeField] Slider fuelbar;
+    public Slider fuelbar;
     // Start is called before the first frame update
     void Start()
     {
@@ -27,6 +31,10 @@ public class PlayerMove : MonoBehaviour
         Pitch();
         Yaw();
         Roll();
+        if (Input.GetKeyDown(KeyCode.H)) 
+        { 
+            SceneManager.LoadScene(0); 
+        }
     }
     void Forward()
     {
@@ -114,6 +122,7 @@ public class PlayerMove : MonoBehaviour
             PlayerAttack myAttack = GetComponent<PlayerAttack>();
             myAttack.ammo = myAttack.ammoMax;
         }
+       
     }
     bool CheckIsAlive()
     {
@@ -127,7 +136,6 @@ public class PlayerMove : MonoBehaviour
         {
             isAlive = true;
         }
-
         return isAlive;
     }
 }

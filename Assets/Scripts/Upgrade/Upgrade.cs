@@ -6,15 +6,19 @@ using TMPro;
 public class Upgrade : MonoBehaviour
 {
     MoneyManager moneyManager;
+    ShipManager shipManager;
     SetupUpgrade setupUpgrade;
     public int[] upgradePrices = {5, 10, 15, 30, 35, 40};
-    [SerializeField] GameObject playerPrefab;
+    GameObject playerPrefab;
 
     // Start is called before the first frame update
     void Start()
     {
+        shipManager = FindObjectOfType<ShipManager>();
         moneyManager = FindObjectOfType<MoneyManager>();
         setupUpgrade = playerPrefab.GetComponent<SetupUpgrade>();
+
+        playerPrefab = shipManager.ships[shipManager.selectedShipIndex];
     }
     public void UpgradeDamage()
     {

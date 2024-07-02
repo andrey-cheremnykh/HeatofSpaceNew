@@ -8,28 +8,23 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] Vector3 minSpawnPos, maxSpawnPos;
     [SerializeField] int desiredEnemyCount = 10;
     EnemyHealth[] enemies;
+    PlayerHealth player;
     int enemyCount = 0;
-
-    // Start is called before the first frame update
-    void Start()
+    private void Update()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
+        player = FindObjectOfType<PlayerHealth>();
         SpawnEnemies();
     }
     void SpawnEnemies()
     {
+        if (player == null) return;
         bool isEnemyCountAboveOrHigherThanDesired = false;
         enemies = FindObjectsOfType<EnemyHealth>();
         enemyCount = enemies.Length;
         if (enemyCount >= desiredEnemyCount) isEnemyCountAboveOrHigherThanDesired = true;
         if (isEnemyCountAboveOrHigherThanDesired == true) return;
 
-        int IndexofEnemyPrefabToSpawn = Random.Range(0, enemyPrefabs.Length /*- 1*/);
+        int IndexofEnemyPrefabToSpawn = Random.Range(0, enemyPrefabs.Length);
         GameObject enemyPrefabToSpawn = enemyPrefabs[IndexofEnemyPrefabToSpawn];
         float SpawnPosX = Random.Range(minSpawnPos.x, maxSpawnPos.x);
         float SpawnPosY = Random.Range(minSpawnPos.y, maxSpawnPos.y);

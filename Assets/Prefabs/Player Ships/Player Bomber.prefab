@@ -110,7 +110,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 180623238947311515}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 1.18}
+  m_LocalPosition: {x: 0, y: 0, z: 0.782}
   m_LocalScale: {x: 0.16915, y: 0.16915, z: 0.5867475}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -181,8 +181,9 @@ GameObject:
   - component: {fileID: 4232112694530264386}
   - component: {fileID: 4521737157458545020}
   - component: {fileID: 6576002888821677405}
+  - component: {fileID: 2801813183340218072}
   m_Layer: 7
-  m_Name: Player
+  m_Name: Player Bomber
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -234,6 +235,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cfb497d40e8a3634b8e866d775c64dec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fuelDecreaseRate: 0.1
   rotateSensitive: 2
   forwardSpeed: 5
   isInvertedPitch: 1
@@ -254,6 +256,8 @@ MonoBehaviour:
   ammoMax: 20
   ammo: 0
   ammoText: {fileID: 0}
+  missilePrefab: {fileID: 9071548884924343778, guid: 5fdbfd9cc02cf9d4c9c7d7370d245a59, type: 3}
+  missileCount: 3
 --- !u!114 &4521737157458545020
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -284,10 +288,30 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damagePerItemLevel: 0a0000000c0000000e000000100000001200000014000000
   defensePerItemLevel: 0500000007000000090000000b0000000d0000000f000000
+  fuelPerItemLevel:
+  - 0.1
+  - 0.07
+  - 0.05
+  - 0.04
+  ammoMaxPerItemLevel: 140000001e000000320000003c0000004600000050000000
   damageLevel: 0
   defenseLevel: 0
-  damageId: damage-level
-  defenseId: defense-level
+  damageCurLevelId: damage-level
+  defenseCurLevelId: defense-level
+  fuelCurLevelId: fuel-level
+  ammoMaxCurLevelId: ammo-level
+--- !u!114 &2801813183340218072
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3886499334353103709}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a7f86b3629015174ba98e094e7577824, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8045355799515640979
 GameObject:
   m_ObjectHideFlags: 0
@@ -299,7 +323,7 @@ GameObject:
   - component: {fileID: 137803579125934080}
   - component: {fileID: 6856833494562540641}
   - component: {fileID: 4242238835555864269}
-  - component: {fileID: 68923190309706941}
+  - component: {fileID: 6416498108313210017}
   m_Layer: 7
   m_Name: Capsule
   m_TagString: Untagged
@@ -329,7 +353,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8045355799515640979}
-  m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!23 &4242238835555864269
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -372,8 +396,8 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!136 &68923190309706941
-CapsuleCollider:
+--- !u!65 &6416498108313210017
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -382,7 +406,6 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.5
-  m_Height: 2
-  m_Direction: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1.0000002, z: 1.0000002}
   m_Center: {x: 0, y: 0, z: 0}

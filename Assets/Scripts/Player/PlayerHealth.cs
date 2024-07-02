@@ -7,8 +7,9 @@ public class PlayerHealth : MonoBehaviour
 {
     public int hp = 100;
     public int defense = 5;
-    [SerializeField] Slider healthBar;
-    [SerializeField] GameObject deathUI;
+
+    public Slider healthBar;
+    public GameObject deathUI;
     // Start is called before the first frame update
     void Start()
     {

@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Shop.unity
     guid: a5cca62ff21cede478cfe3deb6e3687a
+  - enabled: 1
+    path: Assets/Scenes/Ship Selection.unity
+    guid: b84b2a360d93bb843be84d3e62486a0a
   m_configObjects: {}
