@@ -6,25 +6,34 @@ using TMPro;
 public class Upgrade : MonoBehaviour
 {
     MoneyManager moneyManager;
-    ShipManager shipManager;
     SetupUpgrade setupUpgrade;
     public int[] upgradePrices = {5, 10, 15, 30, 35, 40};
-    GameObject playerPrefab;
+    [SerializeField] GameObject[] playerPrefabs;
+    int selectedShipIndex = 0;
 
     // Start is called before the first frame update
     void Start()
     {
-        shipManager = FindObjectOfType<ShipManager>();
         moneyManager = FindObjectOfType<MoneyManager>();
-        setupUpgrade = playerPrefab.GetComponent<SetupUpgrade>();
-
-        playerPrefab = shipManager.ships[shipManager.selectedShipIndex];
+        Initialise();
+    }
+    public void SelectShip(int index)
+    {
+        if (PlayerPrefs.GetInt("ship-unlock" + index) == 1)
+        {
+            selectedShipIndex = index;
+            Initialise();
+        }
+        else print("ship is locked");
+    }
+    public void Initialise()
+    {
+        setupUpgrade = playerPrefabs[selectedShipIndex].GetComponent<SetupUpgrade>();
     }
     public void UpgradeDamage()
     {
         string damageId = setupUpgrade.damageCurLevelId;
         int curLevel = PlayerPrefs.GetInt(damageId);
-        print(curLevel);
 
         bool canPurchase = moneyManager.CheckCanPurchase(upgradePrices[curLevel]);
         if (canPurchase) 

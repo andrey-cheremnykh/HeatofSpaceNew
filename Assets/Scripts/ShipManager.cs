@@ -10,7 +10,7 @@ public class ShipManager : MonoBehaviour
     public GameObject[] ships;
     public int selectedShipIndex = 0;
     public int[] shipsUnlockStatus = { };
-    public int[] shipsUnlockCost = { 0, 200 };
+    public int[] shipsUnlockCost = {0, 50};//change to higher value later
 
     MoneyManager moneyManager;
     [SerializeField] GameObject ShipSeectPanel;
@@ -42,7 +42,6 @@ public class ShipManager : MonoBehaviour
         } 
 
         GameObject spawnedShip = Instantiate(ships[selectedShipIndex], Vector3.zero, Quaternion.identity);
-        print(selectedShipIndex);
         spawnedShip.transform.parent = null;
         spawnedShip.GetComponent<SetupUpgrade>().SetAll();
         Destroy(preSpawnCamera.gameObject);
@@ -70,18 +69,17 @@ public class ShipManager : MonoBehaviour
             print("ship is already unlocked");
             return;
         }
-
-        if (moneyManager.money < shipsUnlockCost[index]) 
+        print(moneyManager.money);
+        if (moneyManager.money >= shipsUnlockCost[index])
         {
-            print("you dont have money");
-            return;
-        } 
-        moneyManager.SpendMoney(shipsUnlockCost[index]);
+            moneyManager.SpendMoney(shipsUnlockCost[index]);
 
-        shipsUnlockStatus[index] = 1;
+            shipsUnlockStatus[index] = 1;
 
-        string unlockIndex = "ship-unlock" + index;
-        PlayerPrefs.SetInt(unlockIndex, 1);
-        print("new unlocked status for " + index + "is " + shipsUnlockStatus[selectedShipIndex]);
+            string unlockIndex = "ship-unlock" + index;
+            PlayerPrefs.SetInt(unlockIndex, 1);
+            print("new unlocked status for " + index + "is " + shipsUnlockStatus[selectedShipIndex]);
+        }
+        else print("you dont have money");
     }
 }

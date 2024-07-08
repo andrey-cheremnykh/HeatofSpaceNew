@@ -7,7 +7,6 @@ TagManager:
   - Refuel Here
   - Reload Here
   - Enemy
-  - Home Here
   layers:
   - Default
   - TransparentFX

@@ -10,6 +10,8 @@ public class PlayerMove : MonoBehaviour
     float fuel = 100;
     public float fuelDecreaseRate = 0.1f;
     float howLongWaitOfFuelDecrease = 0.5f;
+    PlayerHealth health;
+    int hp = 0;
 
     [Space]
 
@@ -21,11 +23,13 @@ public class PlayerMove : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        health = GetComponent<PlayerHealth>();
     }
 
     // Update is called once per frame
     void Update()
     {
+        hp = health.hp;
         fuelbar.value = fuel / 100;
         Forward();
         Pitch();
@@ -33,25 +37,23 @@ public class PlayerMove : MonoBehaviour
         Roll();
         if (Input.GetKeyDown(KeyCode.H)) 
         { 
-            SceneManager.LoadScene(0); 
+            SceneManager.LoadScene(0/*menu*/); 
         }
     }
     void Forward()
     {
-        bool isAlive = CheckIsAlive();
-        if (!isAlive) return;
+        if (hp <= 0) return;
         if (Input.GetKey(KeyCode.Space))
         {
             StartCoroutine(DepleteFuel());
-            if (fuel <= 0) GetComponent<PlayerHealth>().hp = 0;
+            if (fuel <= 0) return;
             Vector3 forwardVector = new Vector3(0, 0, forwardSpeed);
             rb.AddRelativeForce(forwardVector);
         }
     }
     void Pitch()
     {
-        bool isAlive = CheckIsAlive();
-        if (!isAlive) return;
+        if (hp <= 0) return;
         if (isInvertedPitch == false)
         {
             KeyRotate(KeyCode.UpArrow, 0, true);
@@ -65,15 +67,13 @@ public class PlayerMove : MonoBehaviour
     }
     void Roll()
     {
-        bool isAlive = CheckIsAlive();
-        if (!isAlive) return;
+        if (hp <= 0) return; 
         KeyRotate(KeyCode.A, 2, false);
         KeyRotate(KeyCode.D, 2, true);
     }
     void Yaw()
     {
-        bool isAlive = CheckIsAlive();
-        if (!isAlive) return;
+        if (hp <= 0) return;
         KeyRotate(KeyCode.LeftArrow, 1, true);
         KeyRotate(KeyCode.RightArrow, 1, false);
     }
