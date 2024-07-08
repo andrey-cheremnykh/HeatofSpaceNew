@@ -546,7 +546,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 785454249}
   m_Direction: 2
   m_Value: 0
-  m_Size: 0.99205995
+  m_Size: 0.999863
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -699,7 +699,7 @@ MonoBehaviour:
   - {fileID: 3886499334353103709, guid: 33cb6ff2caad8994ba49ff6c93d2a5a7, type: 3}
   selectedShipIndex: 0
   shipsUnlockStatus: 
-  shipsUnlockCost: 00000000c8000000
+  shipsUnlockCost: 0000000032000000
   ShipSeectPanel: {fileID: 672602237}
   preSpawnCamera: {fileID: 418923992}
   playerFuelBar: {fileID: 1800914684}
@@ -3888,7 +3888,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0.0003122553}
+  m_AnchoredPosition: {x: 0, y: 0.00023284944}
   m_SizeDelta: {x: 0, y: 170.6248}
   m_Pivot: {x: 0, y: 1}
 --- !u!1 &1003955007

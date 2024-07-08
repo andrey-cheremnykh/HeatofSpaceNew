@@ -41,13 +41,12 @@ public class EnemyHealth : MonoBehaviour
         healthBar.value = (float)health / 100;
 
     }
-    public void GetDamage()
+    public void GetDamage(int initialDamage)
     {
-        PlayerAttack player = FindObjectOfType<PlayerAttack>();
-        var initialDamage = player.damage;
-        var finalDamage = initialDamage - defense;
+        int finalDamage = initialDamage - defense;
         health -= finalDamage;
-
+        if (health <= 0) Destroy(gameObject);
+        DisplayHealth();
     }
 
 }

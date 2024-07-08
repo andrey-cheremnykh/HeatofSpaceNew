@@ -40,7 +40,7 @@ public class PlayerAttack : MonoBehaviour
                 if (hitInfo.transform)
                 {
                     EnemyHealth en = hitInfo.transform.gameObject.GetComponent<EnemyHealth>();
-                    en.GetDamage();
+                    en.GetDamage(damage);
                 }
         }
 
