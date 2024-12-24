@@ -10,7 +10,8 @@ public class ShipManager : MonoBehaviour
     public GameObject[] ships;
     public int selectedShipIndex = 0;
     public int[] shipsUnlockStatus = { };
-    public int[] shipsUnlockCost = {0, 50};//change to higher value later
+    public int[] shipsUnlockCost = { 0, 50 };//change to higher value later
+    [SerializeField] TMP_Text statusText;
 
     MoneyManager moneyManager;
     [SerializeField] GameObject ShipSeectPanel;
@@ -37,7 +38,7 @@ public class ShipManager : MonoBehaviour
     {
         if (shipsUnlockStatus[selectedShipIndex] == 0) 
         {
-            print("Cannot spawn ship(locked)");
+            statusText.text = $"Ship is locked(unlock cost is {shipsUnlockCost[selectedShipIndex]})";
             return;
         } 
 
@@ -56,17 +57,18 @@ public class ShipManager : MonoBehaviour
     {
         if (shipsUnlockStatus[index] == 0)
         {
-            print("ship is locked");
+            statusText.text = $"ship is locked(unlock cost is {shipsUnlockCost[index]})";
             return;
         }
         selectedShipIndex = index;
+        statusText.text = "selected" + ships[index].gameObject.name;
     }
     public void UnlockShip(int index)
     {
         print("you pressed to unlock " + index);
         if (shipsUnlockStatus[index] == 1)
         {
-            print("ship is already unlocked");
+            statusText.text = "ship is already unlocked";
             return;
         }
         print(moneyManager.money);
@@ -80,6 +82,6 @@ public class ShipManager : MonoBehaviour
             PlayerPrefs.SetInt(unlockIndex, 1);
             print("new unlocked status for " + index + "is " + shipsUnlockStatus[selectedShipIndex]);
         }
-        else print("you dont have money");
+        else statusText.text = $"you dont have money(unlock cost is {shipsUnlockCost[index]})";
     }
 }

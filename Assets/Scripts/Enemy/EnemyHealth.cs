@@ -28,13 +28,6 @@ public class EnemyHealth : MonoBehaviour
     void Update()
     {
         DisplayHealth();
-        if (health <= 0) 
-        {
-            moneyManager.AddMoney(income);
-            Destroy(gameObject);
-        } 
-
-            
     }
     public void DisplayHealth()
     {
@@ -46,7 +39,13 @@ public class EnemyHealth : MonoBehaviour
         int finalDamage = initialDamage - defense;
         if (finalDamage <= 0) return;
         health -= finalDamage;
-        if (health <= 0) Destroy(gameObject);
+        if (health <= 0)
+        {
+            Destroy(gameObject);
+            moneyManager.AddMoney(income);
+            print("im ded(((");
+
+        }
         DisplayHealth();
     }
 

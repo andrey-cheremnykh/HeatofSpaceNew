@@ -15,7 +15,7 @@ public class PlayerMove : MonoBehaviour
 
     [Space]
 
-    public float rotateSensitive = 10;
+    public float rotateSensitive = 0.0000000000001f;
     public float forwardSpeed;
     public bool isInvertedPitch = true;
     public Slider fuelbar;
