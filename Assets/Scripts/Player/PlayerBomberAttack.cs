@@ -34,8 +34,8 @@ public class PlayerBomberAttack : PlayerAttack
             for (int i = 0; i < missileCount + 1; i++)
             {
                 int enemyIndex = UnityEngine.Random.Range(0, enemiesToAttack.Count);
-                int attackChance = UnityEngine.Random.Range(1, 100 / hitChancePercent);
-                if (attackChance == 1)
+                int attackChance = UnityEngine.Random.Range(1, 100);
+                if (attackChance <= hitChancePercent)
                 {
                     enemiesToAttack[enemyIndex].GetDamage(damage);
                     print(enemiesToAttack[enemyIndex].health);

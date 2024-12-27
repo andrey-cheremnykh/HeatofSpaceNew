@@ -25,11 +25,15 @@ public class EnemySpawner : MonoBehaviour
         if (isEnemyCountAboveOrHigherThanDesired == true) return;
 
         int IndexofEnemyPrefabToSpawn = Random.Range(0, enemyPrefabs.Length);
+
         GameObject enemyPrefabToSpawn = enemyPrefabs[IndexofEnemyPrefabToSpawn];
+        print("njykmu,lk.,l" +enemyPrefabToSpawn.GetComponent<EnemyAttack>().fireInterval);
+
         float SpawnPosX = Random.Range(minSpawnPos.x, maxSpawnPos.x);
         float SpawnPosY = Random.Range(minSpawnPos.y, maxSpawnPos.y);
         float SpawnPosZ = Random.Range(minSpawnPos.z, maxSpawnPos.z);
         Vector3 spawnPos = new Vector3(SpawnPosX, SpawnPosY, SpawnPosZ);
+
         Instantiate(enemyPrefabToSpawn,spawnPos,Quaternion.identity);
     }
 }

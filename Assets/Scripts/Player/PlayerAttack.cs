@@ -10,7 +10,7 @@ public class PlayerAttack : MonoBehaviour
     public int ammoMax = 20;
     public int ammo = 0;
     public TMP_Text ammoText;
-    [SerializeField] float fireRange=100;
+    [SerializeField] float fireRange=100000;
 
     // Start is called before the first frame update
     void Start()
@@ -37,11 +37,11 @@ public class PlayerAttack : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.S))
         {
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            Ray ray = new Ray(transform.position,transform.forward);
                 if (ammo <= 0) return;
                 ammo--;
                 RaycastHit hitInfo;
-                Physics.Raycast(ray, out hitInfo, fireRange);
+                Physics.Raycast(ray, out hitInfo, /*fireRange*/Mathf.Infinity);
                 if (hitInfo.transform)
                 {
                     EnemyHealth en = hitInfo.transform.gameObject.GetComponent<EnemyHealth>();
