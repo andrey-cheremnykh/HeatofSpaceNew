@@ -25,7 +25,7 @@ public class UpgradeMenuNavigation : MonoBehaviour
             print("ship is locked");
             return;
         }
-        uiLogic.PressButtonSetPanelActive(upgradeMenusPerShip[menuIndex], true);
-        uiLogic.PressButtonSetPanelActive(selectShipMenu, false);
+        uiLogic.PressButtonActivatePanel(upgradeMenusPerShip[menuIndex]);
+        uiLogic.PressButtonDeactivatePanel(selectShipMenu);
     }
 }

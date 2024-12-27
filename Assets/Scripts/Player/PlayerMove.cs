@@ -120,6 +120,7 @@ public class PlayerMove : MonoBehaviour
         else if(whatCollider.gameObject.CompareTag("Reload Here"))
         {
             PlayerAttack myAttack = GetComponent<PlayerAttack>();
+            print(myAttack);
             myAttack.ammo = myAttack.ammoMax;
         }
        

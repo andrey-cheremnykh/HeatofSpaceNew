@@ -431,7 +431,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 10
-  rageRadius: 10
+  rageRadius: 20
 --- !u!114 &7911806861368152011
 MonoBehaviour:
   m_ObjectHideFlags: 0

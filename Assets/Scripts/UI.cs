@@ -17,9 +17,13 @@ public class UI : MonoBehaviour
     {
         SceneManager.LoadScene(sceneIndex);
     }
-    public void PressButtonSetPanelActive(GameObject panel, bool isActivate)
+    public void PressButtonActivatePanel(GameObject panel)
     {
-        panel.SetActive(isActivate);
+        panel.SetActive(true);
+    }
+    public void PressButtonDeactivatePanel(GameObject panel)
+    {
+        panel.SetActive(false);
     }
     void DisplayMoney()
     {
